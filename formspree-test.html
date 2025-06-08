@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formspree Test | Dhanush Acharya</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #7564e5;
+            text-align: center;
+        }
+        form {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background: #7564e5;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #6553d4;
+        }
+        .instructions {
+            background: #e9f7fe;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .note {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="instructions">
+        <h2>Formspree Test Form</h2>
+        <p>This is a minimal test form to verify your Formspree setup is working correctly. After submitting, check your email to see if you received the test message.</p>    </div>
+
+    <form action="https://formspree.io/f/mnnvpabo" method="POST">
+        <!-- Add hidden fields for Formspree configuration -->
+        <input type="hidden" name="_subject" value="Test Form Submission">
+        <input type="hidden" name="_next" value="thank-you.html">
+        
+        <div>
+            <label for="name">Your Name</label>
+            <input type="text" name="name" id="name" required>
+        </div>
+        
+        <div>
+            <label for="email">Your Email</label>
+            <input type="email" name="_replyto" id="email" required>
+        </div>
+        
+        <div>
+            <label for="message">Test Message</label>
+            <textarea name="message" id="message" rows="4" required>This is a test message to verify Formspree is working.</textarea>
+        </div>
+        
+        <!-- Anti-spam honeypot field -->
+        <input type="text" name="_gotcha" style="display:none">
+        
+        <button type="submit">Send Test Message</button>
+    </form>
+    
+    <div class="note">
+        <p><strong>Important:</strong> Replace the form action with your own Formspree endpoint:</p>
+        <code>action="https://formspree.io/f/YOUR_ENDPOINT"</code>
+        <p>See FORMSPREE_SETUP.md for detailed instructions.</p>
+        <p><a href="index.html">Return to Portfolio</a></p>
+    </div>
+</body>
+</html>

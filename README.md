@@ -1,103 +1,118 @@
-Parax - Responsive Multipurpose Website
-Parax is a responsive and multipurpose website template designed to provide modern web functionality for businesses, portfolios, and individual creators. It features a sleek, user-friendly interface and is built using popular web development technologies to ensure high performance and adaptability.
+# Dhanush Acharya Portfolio Website
 
-Table of Contents
-About the Project
-Technologies Used
-Features
-Getting Started
-Prerequisites
-Installation
-Usage
-Contributing
-License
-Contact
-About the Project
-The Parax project provides an easily customizable template for building responsive websites. Whether you're building a landing page for a product, a portfolio for your work, or a general-purpose website, Parax has you covered. The template includes various sections like a home page, about section, services, portfolio, team, testimonials, and a contact form.
+A responsive personal portfolio website showcasing Dhanush Acharya's skills, projects, and contact information.
 
-This project aims to help web developers quickly deploy high-quality websites by providing a solid foundation with pre-built components.
+## Table of Contents
+- [About the Website](#about-the-website)
+- [Features](#features)
+- [Contact Form Setup](#contact-form-setup)
+- [Customization](#customization)
+- [Server Requirements](#server-requirements)
+- [Troubleshooting](#troubleshooting)
+- [Contact](#contact)
 
-Technologies Used
-HTML5 – For structuring the content on the website.
-CSS3 – For styling and creating responsive designs.
-JavaScript – For interactive elements and dynamic user experience.
-Bootstrap – A popular CSS framework to ensure a responsive layout.
-PHP – For handling the backend form submissions, such as the contact form.
-Git – For version control.
-VS Code – The integrated development environment (IDE) used for development.
-GitHub – For project hosting and version management.
-Features
-Fully responsive design.
-Easy customization and modular structure.
-Prebuilt sections like home, about, services, portfolio, team, and contact.
-PHP-based contact form with email functionality.
-Cross-browser compatibility.
-SEO-friendly.
-Getting Started
-Follow these steps to get the project running on your local machine for development and testing purposes.
+## About the Website
+This portfolio website is designed to showcase Dhanush Acharya's professional skills, experience, and projects. It includes sections for personal information, services offered, portfolio items, testimonials, and contact options.
 
-Prerequisites
-Ensure you have the following installed:
+## Features
+- Fully responsive design
+- Modern and clean UI
+- Downloadable CV
+- Portfolio gallery with project showcase
+- Social media integration
+- Contact form with multiple fallback options
+- Testimonials section
+- Skills and experience visualization
 
-Git – Download Git
-PHP – Download PHP for handling backend contact form.
-Web Browser – Chrome, Firefox, Edge, or any modern browser.
-Installation
-Clone the repository:
+## Contact Form Setup
 
-bash
-Copy code
-git clone https://github.com/your-username/parax.git
-Navigate to the project directory:
+The website includes multiple contact form solutions to ensure it works across different hosting environments:
 
-bash
-Copy code
-cd parax
-Open the project in your IDE (e.g., VS Code):
+### Primary PHP Contact Form (contact-handler.php)
+This is the default form that uses PHP mail() function:
 
-bash
-Copy code
-code .
-Launch a local development server (VS Code extensions or PHP's built-in server):
+1. **Server Requirements**:
+   - PHP 5.6 or higher
+   - mail() function enabled on the server
+   - Proper server configuration for sending emails
 
-bash
-Copy code
-php -S localhost:8000
-Usage
-To use this template:
+2. **Configuration**:
+   - Edit `contact-handler.php` and update the following line:
+     ```php
+     $to = 'dhanusha621@gmail.com'; // Change to your email
+     ```
 
-Customize the content in index.html and other section files as needed.
-Modify the styles in style.css to change the appearance of the site.
-Edit the PHP contact form to route emails to your desired email address:
-php
-Copy code
-$to = 'your-email@domain.com'; 
-Test the contact form functionality by submitting it and checking if the email is received.
-Screenshots
-Add screenshots here of the project in action to demonstrate functionality.
+3. **How it works**:
+   - Uses PHP's mail() function to send emails
+   - Includes fallback to save messages to a text file
+   - Uses AJAX for submission without page reload
+   - Redirects to thank-you.html on success
 
-Contributing
-Contributions are welcome! Feel free to fork this project and submit a pull request. To contribute:
+### Formspree Fallback (Automatic)
+If the PHP solution fails, the form automatically falls back to Formspree:
 
-Fork the project.
-Create a new feature branch:
-bash
-Copy code
-git checkout -b feature/YourFeature
-Commit your changes:
-bash
-Copy code
-git commit -m "Add a useful feature"
-Push your branch:
-bash
-Copy code
-git push origin feature/YourFeature
-Open a pull request and describe the changes you've made.
-License
-This project is licensed under the MIT License. See the LICENSE file for more details.
+1. **How it works**:
+   - Creates a hidden form and submits to Formspree
+   - Redirects to thank-you.html after submission
+   - No server configuration required
 
-Contact
-Dhanush – dhanusha621@gmaii.com
+2. **Configuration**:
+   - Sign up for a free account at [Formspree.io](https://formspree.io)
+   - Create a new form and get your unique endpoint
+   - Edit `js/form-contact.js` and update:
+     ```javascript
+     'action': 'https://formspree.io/f/mnnvpabo'
+     ```
+   - Replace with your own Formspree endpoint (see FORMSPREE_SETUP.md for detailed instructions)
+
+### Alternative Contact Form (contact-alt.html)
+A standalone page using Formspree exclusively:
+
+1. **How to use**:
+   - Link to `contact-alt.html` from your main page
+   - Or use it as a direct replacement if PHP form doesn't work
+
+2. **Configuration**:
+   - Edit the form action in `contact-alt.html`:
+     ```html
+     action="https://formspree.io/f/mnnvpabo"
+     ```
+   - Replace with your own Formspree endpoint
+   - For detailed setup instructions, see the FORMSPREE_SETUP.md file
+
+## Server Requirements
+- Web server (Apache, Nginx, etc.)
+- PHP 5.6 or higher (for contact form)
+- Properly configured mail server (for PHP contact form)
+
+## Troubleshooting
+
+### Contact Form Not Working
+1. **Check server logs**:
+   - Look for errors in `logs/contact_form_*.log`
+   - Check server error logs
+
+2. **PHP mail() function disabled**:
+   - Use the alternative contact form at `contact-alt.html`
+   - Or configure server to enable mail() function
+
+3. **Formspree not working**:
+   - Verify your Formspree endpoint
+   - Check if you've confirmed your email with Formspree
+   - Try using a different email service
+
+### Message Backup
+All messages are automatically saved to `messages.txt` as a backup in case email sending fails.
+
+## Contact
+Dhanush Acharya - dhanusha621@gmail.com
+
+Social Media:
+- [Facebook](https://www.facebook.com/dhanushacharya.dhanu.9/)
+- [Twitter](https://twitter.com/DhanushAcharya)
+- [LinkedIn](https://www.linkedin.com/in/dhanush-acharya-977543326/)
+- [Instagram](https://www.instagram.com/dhanush_acharya/)
+- [GitHub](https://github.com/Dhanushach126)
 
 Project Link: https://github.com/dhanush/parax
 

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alternative Contact Form | Dhanush Acharya</title>
+    <link rel="stylesheet" href="css/plugins/bootstrap.min.css">
+    <link href="fonts/font-awesome.min.css" rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet"/>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 50px;
+        }
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            margin-bottom: 50px;
+        }
+        .form-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-header h1 {
+            color: #7564e5;
+            margin-bottom: 15px;
+        }
+        .btn-submit {
+            background-color: #7564e5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-submit:hover {
+            background-color: #6553d4;
+            transform: translateY(-2px);
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #7564e5;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        #status {
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 form-container">                <div class="form-header">
+                    <h1>Contact Dhanush Acharya</h1>
+                    <p>This form uses Formspree to deliver messages directly to my email without requiring PHP.</p>
+                    <div style="background: #e9f7fe; padding: 15px; border-radius: 5px; margin-bottom: 20px; font-size: 0.9em;">
+                        <strong>Note:</strong> Before using this form on your live site, please follow the setup instructions in the FORMSPREE_SETUP.md file and replace the form endpoint with your own from Formspree.                    </div>
+                </div>
+                
+                <form id="contactForm" action="https://formspree.io/f/mnnvpabo" method="POST">
+                    <!-- Redirect after submission -->
+                    <input type="hidden" name="_next" value="thank-you.html">
+                    
+                    <!-- Subject line for the email -->
+                    <input type="hidden" name="_subject" value="New message from portfolio contact form">
+                    
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" class="form-control" id="email" name="_replyto" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" class="form-control" id="subject" name="subject" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea class="form-control" id="message" name="message" rows="6" required></textarea>
+                    </div>
+                    
+                    <!-- Anti-spam honeypot field -->
+                    <input type="text" name="_gotcha" style="display:none">
+                    
+                    <!-- Redirect after submission -->
+                    <input type="hidden" name="_next" value="https://yourdomain.com/thank-you.html">
+                    
+                    <div class="text-center">
+                        <button type="submit" class="btn-submit">Send Message</button>
+                    </div>
+                    
+                    <div id="status"></div>
+                </form>
+                
+                <a href="index.html" class="back-link">← Back to Portfolio</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var form = document.getElementById("contactForm");
+        var status = document.getElementById("status");
+        
+        function success() {
+            form.reset();
+            status.innerHTML = "Thanks! Your message has been sent.";
+            status.classList.add("success");
+            status.style.display = "block";
+        }
+        
+        function error() {
+            status.innerHTML = "Oops! There was a problem sending your message.";
+            status.classList.add("error");
+            status.style.display = "block";
+        }
+        
+        // Handle the form submission event
+        form.addEventListener("submit", function(ev) {
+            ev.preventDefault();
+            var data = new FormData(form);
+            ajax(form.method, form.action, data, success, error);
+        });
+        
+        // Helper function for sending an AJAX request
+        function ajax(method, url, data, success, error) {
+            var xhr = new XMLHttpRequest();
+            xhr.open(method, url);
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState !== XMLHttpRequest.DONE) return;
+                if (xhr.status === 200) {
+                    success(xhr.response, xhr.responseType);
+                } else {
+                    error(xhr.status, xhr.response, xhr.responseType);
+                }
+            };
+            xhr.send(data);
+        }
+    </script>
+</body>
+</html>
